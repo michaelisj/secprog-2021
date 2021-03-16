@@ -1,0 +1,6 @@
+function submit() {
+    // Later
+}
+
+$(function () {
+})
