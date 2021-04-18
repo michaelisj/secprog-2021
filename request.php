@@ -6,11 +6,11 @@ $mysql = mysqli_connect("localhost", "root", "Password1", "secprog");
 if (isset($_POST["name"])) {
     $mainQuery = sprintf(
         "INSERT INTO Messages(ClientName, MailAddress, Subject, PhoneNumber, Message) VALUES('%s', '%s', '%s', '%s', '%s')",
-        $_POST["name"],
-        $_POST["email"],
-        $_POST["subject"],
-        $_POST["phone_number"],
-        $_POST["message"]
+        mysqli_escape_string($mysql, $_POST["name"]),
+        mysqli_escape_string($mysql, $_POST["email"]),
+        mysqli_escape_string($mysql, $_POST["subject"]),
+        mysqli_escape_string($mysql, $_POST["phone_number"]),
+        mysqli_escape_string($mysql, $_POST["message"])
     );
 
     if ($lastResult = mysqli_query($mysql, $mainQuery)) {

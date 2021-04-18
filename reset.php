@@ -6,3 +6,5 @@ $mysql = mysqli_connect("localhost", "root", "Password1", "secprog");
 $mysql->multi_query($commands);
 
 mysqli_close($mysql);
+
+require "index.php";

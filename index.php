@@ -137,7 +137,7 @@
             <?php
             $message = "";
             if (isset($GLOBALS["lastResult"])) {
-                $message .= sprintf("<p>MySQL query: %s</p>", $mainQuery);
+                $message .= sprintf("<p>MySQL query: %s</p>", htmlspecialchars($mainQuery));
                 if ($lastResult === true) {
                     $class = "alert-primary";
                     $message .= "<h3> Operation completed successfully </h3>";
@@ -165,7 +165,7 @@
                 return sprintf(
                     "<h3>Name: %s</h3><h3>Phone: %s</h3><h3>Mail: %s</h3><h3>Subject: %s</h3><p>Message: %s</p>",
                     htmlspecialchars($result["ClientName"]),
-                    htmlspecialchars($result["PhoneNumber"]),
+                    $result["PhoneNumber"],
                     htmlspecialchars($result["MailAddress"]),
                     htmlspecialchars($result["Subject"]),
                     htmlspecialchars($result["Message"])
