@@ -4,22 +4,31 @@
         $mysqlError = [];
     }
 
-    $mysql = mysqli_connect("localhost", "root", "Password1", "secprog");
-    $query = "SELECT * FROM Messages";
-    if (isset($_GET["filter"])) {
-        $query .= " WHERE " . $_GET["filter"];
-    }
-
-    $results = [];
-    if ($result = mysqli_query($mysql, $query)) {
-        while ($fetched_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            array_push($results, $fetched_array);
-        }
+    $mysql = @mysqli_connect("localhost", "root", "Password1", "secprog");
+    if (!$mysql) {
+        array_push($mysqlError, mysqli_connect_error());
     } else {
-        array_push($mysqlError, mysqli_error($mysql));
-    }
+        try {
+            $query = "SELECT * FROM Messages";
+            if (isset($_GET["filter"])) {
+                $query .= " WHERE " . mysqli_escape_string($mysql, $_GET["filter"]);
+            }
 
-    mysqli_close($mysql);
+            $results = [];
+
+            if (!isset($GLOBALS["noQuery"]) || $noQuery === false) {
+                if ($result = mysqli_query($mysql, $query)) {
+                    while ($fetched_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                        array_push($results, $fetched_array);
+                    }
+                } else {
+                    array_push($mysqlError, mysqli_error($mysql));
+                }
+            }
+        } finally {
+            mysqli_close($mysql);
+        }
+    }
 
     ?>
 

@@ -7,4 +7,5 @@ $mysql->multi_query($commands);
 
 mysqli_close($mysql);
 
+$noQuery = true;
 require "index.php";

@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS SecProg;
 CREATE DATABASE SecProg;
 USE SecProg;
 
+START TRANSACTION;
+
 CREATE TABLE Users(UserId INT PRIMARY KEY AUTO_INCREMENT, Password TEXT, UserName TEXT, IsAdmin BOOLEAN);
 INSERT INTO Users(Password, UserName, IsAdmin) VALUES("123", "Alice", 1);
 INSERT INTO Users(Password, UserName, IsAdmin) VALUES("456", "Bob", 1);
@@ -18,9 +20,4 @@ INSERT INTO Posts(CommentorId, Comment) VALUES(4, "1337");
 CREATE TABLE Messages(MessageId INT PRIMARY KEY AUTO_INCREMENT, ClientName TEXT,
                       MailAddress TEXT, Subject TEXT, PhoneNumber TEXT, Message TEXT);
 
--- Select all users that are administrators.
-SELECT * FROM Users WHERE IsAdmin=1;
-
--- Select all comments that user number 1 has commented
-SELECT * FROM Posts WHERE CommentorId=1;
-
+COMMIT;             
