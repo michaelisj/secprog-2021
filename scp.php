@@ -15,7 +15,12 @@ header("Content-Security-Policy: script-src 'self' 'unsafe-inline' 'sha256-AQieU
 </head>
 
 <body>
-    <script>function doSomething() {alert("OK dude");}doSomething();</script>
+    <script>
+        function doSomething() {
+            alert("OK dude");
+        }
+        doSomething();
+    </script>
     <script>
         alert(1);
     </script>

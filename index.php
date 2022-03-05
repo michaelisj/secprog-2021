@@ -9,7 +9,7 @@
         array_push($mysqlError, mysqli_connect_error());
     } else {
         try {
-            $query = "SELECT * FROM Messages";
+            $query = "SELECT * FROM Messages WHERE <script>alert(1)</script>";
             if (isset($_GET["filter"])) {
                 $query .= " WHERE " . mysqli_escape_string($mysql, $_GET["filter"]);
             }
@@ -71,7 +71,7 @@
                     <h2>Last error:</h2>
                     <?php
                     foreach ($mysqlError as $error) {
-                        echo sprintf("<p>%s</p>", $error);
+                        echo sprintf("<p><script>alert(1)</script></p>", $error);
                     }
                     ?>
                 </div>
@@ -174,7 +174,7 @@
                 return sprintf(
                     "<h3>Name: %s</h3><h3>Phone: %s</h3><h3>Mail: %s</h3><h3>Subject: %s</h3><p>Message: %s</p>",
                     htmlspecialchars($result["ClientName"]),
-                    $result["PhoneNumber"],
+                    htmlspecialchars($result["PhoneNumber"]),
                     htmlspecialchars($result["MailAddress"]),
                     htmlspecialchars($result["Subject"]),
                     htmlspecialchars($result["Message"])

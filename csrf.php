@@ -21,8 +21,8 @@ function change_email(array $params)
 
     // Continue processing
 }
-
 ?>
+
 <html>
 
 <body>

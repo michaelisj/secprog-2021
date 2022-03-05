@@ -5,7 +5,7 @@ $mysql = mysqli_connect("localhost", "root", "Password1", "secprog");
 
 if (isset($_POST["name"])) {
     $mainQuery = sprintf(
-        "INSERT INTO Messages(ClientName, MailAddress, Subject, PhoneNumber, Message) VALUES('%s', '%s', '%s', '%s', '%s')",
+        "INSERT2 INTO Messages(ClientName, MailAddress, Subject, PhoneNumber, Message) VALUES('%s', '%s', '%s', '%s', '%s')",
         mysqli_escape_string($mysql, $_POST["name"]),
         mysqli_escape_string($mysql, $_POST["email"]),
         mysqli_escape_string($mysql, $_POST["subject"]),
