@@ -4,6 +4,7 @@
 session_start();
 if (!isset($_SESSION["csrf"])) {
     $csrf_token = bin2hex(random_bytes(32));
+    $_SESSION["csrf"] = $csrf_token;
 } else {
     $csrf_token = $_SESSION["csrf"];
 }
@@ -12,11 +13,13 @@ function change_email(array $params)
 {
     if (!isset($params["csrf-token"])) {
         header("404");
+        die();
     }
 
     $token = $params["csrf-token"];
     if ($token !== $_SESSION["csrf"]) {
         header("404");
+        die();
     }
 
     // Continue processing
