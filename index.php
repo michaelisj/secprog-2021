@@ -4,12 +4,16 @@
         $mysqlError = [];
     }
 
+    if (!isset($GLOBALS["results"])) {
+        $results = [];
+    }
+
     $mysql = @mysqli_connect("localhost", "root", "Password1", "secprog");
     if (!$mysql) {
         array_push($mysqlError, mysqli_connect_error());
     } else {
         try {
-            $query = "SELECT * FROM Messages WHERE <script>alert(1)</script>";
+            $query = "SELECT * FROM Messages";
             if (isset($_GET["filter"])) {
                 $query .= " WHERE " . mysqli_escape_string($mysql, $_GET["filter"]);
             }
@@ -71,7 +75,7 @@
                     <h2>Last error:</h2>
                     <?php
                     foreach ($mysqlError as $error) {
-                        echo sprintf("<p><script>alert(1)</script></p>", $error);
+                        echo sprintf("%s", $error);
                     }
                     ?>
                 </div>
